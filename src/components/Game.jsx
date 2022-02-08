@@ -38,8 +38,10 @@ const Game = (props) => {
 		let status;
 		if (winner) {
 			status = "Winner: " + winner;
+		} else if (current.squares.every(val => val !== null)) {
+			status = "Draw";
 		} else {
-			status = "Next player " + (xIsNext ? "X" : "O");
+			status = "Next player: " + (xIsNext ? "X" : "O");
 		}
 		return status;
 	}
