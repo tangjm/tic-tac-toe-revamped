@@ -8,6 +8,8 @@ const Game = (props) => {
 	const [xIsNext, setXIsNext] = useState(true);
 	const [stepNumber, setStepNumber] = useState(0);
 
+	const [selectedMove, setSelectedMove] = useState(null);
+
 	const handleClick = i => {
 		const historyCopy = history.slice(0, stepNumber + 1);
 		const current = historyCopy[historyCopy.length - 1];
@@ -25,6 +27,7 @@ const Game = (props) => {
 	}
 
 	const jumpTo = i => {
+		setSelectedMove(i);
 		setStepNumber(i);
 		setXIsNext(i % 2 === 0);
 	}
@@ -75,11 +78,13 @@ const Game = (props) => {
 
 	const moves = () => {
 		const moves = history.map((step, move) => {
+			const isSelected = selectedMove === move ? "selected" : "";
 			const desc = move ? "goto move #" + move
 				: "goto game start";
-			return <li key={move}>
+			return <li key={move} className={isSelected}>
 				<span>{getMoveCoordinates(move)}</span>
-				<button onClick={() => jumpTo(move)}>
+				<button className={isSelected}
+					onClick={() => jumpTo(move)}>
 					{desc}
 				</button>
 			</li>
