@@ -18,6 +18,6 @@ export function calculateWinner(squares) {
 			}
 		}
 	}
-	return { result: null, combination: null };
+	return { result: null };
 }
 

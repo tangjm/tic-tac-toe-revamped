@@ -1,6 +1,11 @@
-import { useState } from 'react';
+import { useState, useReducer } from 'react';
 import { calculateWinner } from '../utils/calculateWinner';
 import Board from './Board';
+
+const reducer = (currentState, action) => {
+	if (action?.data)
+		return currentState.concat(action.data);
+}
 
 const Game = (props) => {
 	const initialHistory = [{ squares: Array(9).fill(null) }];
@@ -13,13 +18,13 @@ const Game = (props) => {
 	const [winningSquares, setWinningSquares] = useState([]);
 
 	const handleClick = i => {
-		setWinningSquares([]);
+		setWinningSquares(currentState => []);
 		const historyCopy = history.slice(0, stepNumber + 1);
 		const current = historyCopy[historyCopy.length - 1];
 		const squares = current.squares.slice();
 
 		const resultObj = calculateWinner(squares);
-		if (resultObj.result) {
+		if (resultObj?.result) {
 			setWinningSquares(winningSquares => winningSquares.concat(resultObj.combination));
 			return;
 		}
