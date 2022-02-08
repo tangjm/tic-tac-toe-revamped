@@ -22,7 +22,7 @@ const Board = props => {
 				count++;
 			}
 			board.push(
-				<div className="board-row">
+				<div key={"row" + i} className="board-row">
 					{row}
 				</div>
 			);
