@@ -1,6 +1,6 @@
 import './App.css';
 import './css/Game.css';
-import Game from './containers/Game';
+import Game from './components/Game';
 
 function App() {
   return (
