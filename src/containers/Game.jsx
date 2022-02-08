@@ -41,11 +41,44 @@ const Game = (props) => {
 		return status;
 	}
 
+	const getMoveCoordinates = move => {
+		// 0 -> 0, 0
+		// 1 -> 0, 1
+		// 2 -> 0, 2
+		// 3 -> 1, 0
+		// 4 -> 1, 1
+		// 5 -> 1, 2
+		// 6 -> 2, 0
+		// 7 -> 2, 1
+		// 8 -> 2, 2
+		// find difference between the current history state and its previous state
+		// calculate the coordinates of the square whose value has changed
+		let updatedSquare = null;
+		for (let i = 0; i < 9; i++) {
+			if (move <= 0) return;
+			const current = history[move].squares[i];
+			const previous = history[move - 1].squares[i];
+			if (current !== previous) {
+				updatedSquare = i;
+				break;
+			}
+		}
+
+		const coordinates = [];
+		for (let i = 0; i < 3; i++) {
+			for (let j = 0; j < 3; j++) {
+				coordinates.push([i, j]);
+			}
+		}
+		return ["(", ")"].join(coordinates[updatedSquare]);
+	}
+
 	const moves = () => {
 		const moves = history.map((step, move) => {
 			const desc = move ? "goto move #" + move
 				: "goto game start";
 			return <li key={move}>
+				<span>{getMoveCoordinates(move)}</span>
 				<button onClick={() => jumpTo(move)}>
 					{desc}
 				</button>
