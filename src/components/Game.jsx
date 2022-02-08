@@ -9,15 +9,21 @@ const Game = (props) => {
 	const [stepNumber, setStepNumber] = useState(0);
 
 	const [selectedMove, setSelectedMove] = useState(null);
+	const [isChronological, setIsChronological] = useState(true);
+	const [winningSquares, setWinningSquares] = useState([]);
 
 	const handleClick = i => {
+		setWinningSquares([]);
 		const historyCopy = history.slice(0, stepNumber + 1);
 		const current = historyCopy[historyCopy.length - 1];
 		const squares = current.squares.slice();
 
-		if (calculateWinner(squares) || squares[i]) {
+		const resultObj = calculateWinner(squares);
+		if (resultObj.result) {
+			setWinningSquares(winningSquares => winningSquares.concat(resultObj.combination));
 			return;
 		}
+		if (squares[i]) return;
 
 		squares[i] = xIsNext ? 'X' : 'O';
 
@@ -34,7 +40,7 @@ const Game = (props) => {
 
 	const status = () => {
 		const current = history[stepNumber];
-		const winner = calculateWinner(current.squares);
+		const winner = calculateWinner(current.squares).result;
 		let status;
 		if (winner) {
 			status = "Winner: " + winner;
@@ -81,26 +87,36 @@ const Game = (props) => {
 			const isSelected = selectedMove === move ? "selected" : "";
 			const desc = move ? "goto move #" + move
 				: "goto game start";
-			return <li key={move} className={isSelected}>
-				<span>{getMoveCoordinates(move)}</span>
-				<button className={isSelected}
-					onClick={() => jumpTo(move)}>
-					{desc}
-				</button>
-			</li>
+			return (
+				<li key={move} className={isSelected}>
+					<span>{getMoveCoordinates(move)}</span>
+					<button className={isSelected}
+						onClick={() => jumpTo(move)}>
+						{desc}
+					</button>
+				</li>
+			)
 		});
-		return moves;
+		return isChronological ? moves : moves.reverse();
+	}
+
+	const flipMoveOrder = () => {
+		setIsChronological(isChronological => !isChronological);
 	}
 
 	return (
 		<div className="game">
 			<div className="game-board">
 				<Board squares={history[stepNumber].squares}
+					winningSquares={winningSquares}
 					onClick={i => handleClick(i)} />
 			</div>
 			<div className="game-info">
 				<div>{status()}</div>
 				<ol>{moves()}</ol>
+			</div>
+			<div>
+				<button onClick={flipMoveOrder}>Reverse move order</button>
 			</div>
 		</div>
 	);
