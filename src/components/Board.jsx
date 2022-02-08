@@ -13,20 +13,46 @@ const Board = props => {
 	}
 
 	const createGameBoard = () => {
-		const board = new Array(3).fill(new Array(3));
 		let count = 0;
-		for (let row = 0; row < board.length; row++) {
-			for (let column = 0; column < board[row].length; column++) {
-				board[row][column] = renderSquare(count);
-				console.log(count);
+		let board = [];
+		for (let i = 0; i < 3; i++) {
+			let row = [];
+			for (let j = 0; j < 3; j++) {
+				row.push(renderSquare(count));
 				count++;
 			}
+			board.push(
+				<div className="board-row">
+					{row}
+				</div>
+			);
 		}
-
 		return board;
 	}
 
-	const generateGameBoard = (start, end) => {
+	// alternative
+	const createRows = () => {
+		const gameSquares = generateGameSquares();
+		return gameSquares
+			.reduce((previousSquare, currentSquare, index) => {
+				if (index % 3 === 0) {
+					let row = [
+						currentSquare,
+						gameSquares[index + 1],
+						gameSquares[index + 2]
+					];
+					return previousSquare.concat([row]);
+				}
+				return previousSquare;
+			}, [])
+			.map((row, index) => {
+				return <div key={"row" + index} className="board-row">
+					{row}
+				</div>
+			})
+	}
+
+	const generateGameSquares = (start, end) => {
 		let boardCells = [];
 		let count = 0;
 		while (count < 9) {
@@ -38,18 +64,8 @@ const Board = props => {
 
 	return (
 		<div>
-			<div className="board-row">
-				{generateGameBoard(0, 3)}
-
-			</div>
-			<div className="board-row">
-				{generateGameBoard(3, 6)}
-
-			</div>
-			<div className="board-row">
-				{generateGameBoard(6, 9)}
-
-			</div>
+			{/* {createRows()} */}
+			{createGameBoard()}
 		</div>
 	);
 }
