@@ -7,9 +7,15 @@ const Board = props => {
 	const renderSquare = i => {
 		return (
 			<Square id={i} key={i}
-				isHighlighted={props.winningSquares.includes(i)}
+				isHighlighted={props.winningSquares.includes(i) ? true : false}
 				value={props.squares[i]}
 				onClick={() => props.onClick(i)}
+			/* () => {
+				(i) => {
+					handleClick(i);
+				}
+			}
+			*/
 			/>
 		);
 	}

@@ -4,13 +4,8 @@ import PropTypes from 'prop-types';
 function Square(props) {
 	const { isHighlighted, onClick, value } = props;
 
-	const handleClick = e => {
-		console.log(e.target.className);
-		onClick();
-	}
-
 	return (
-		<button className={isHighlighted ? "square winningSquare" : "square"} onClick={handleClick}>
+		<button className={isHighlighted ? "square winningSquare" : "square"} onClick={onClick}>
 			{value}
 		</button>
 	);
@@ -19,7 +14,7 @@ function Square(props) {
 Square.propTypes = {
 	isHighlighted: PropTypes.bool.isRequired,
 	onClick: PropTypes.func.isRequired,
-	value: PropTypes.oneOf(["X", "O", null])
+	value: PropTypes.oneOf(["X", "O", null]),
 }
 
 export default Square;

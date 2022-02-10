@@ -17,17 +17,25 @@ const Game = (props) => {
 	const [isChronological, setIsChronological] = useState(true);
 	const [winningSquares, setWinningSquares] = useState([]);
 
+
 	const handleClick = i => {
 		setWinningSquares(currentState => []);
 		const historyCopy = history.slice(0, stepNumber + 1);
 		const current = historyCopy[historyCopy.length - 1];
 		const squares = current.squares.slice();
 
-		const resultObj = calculateWinner(squares);
-		if (resultObj?.result) {
-			setWinningSquares(winningSquares => winningSquares.concat(resultObj.combination));
-			return;
-		}
+		// const resultObj = calculateWinner(squares);
+		// if (resultObj.result) {
+		// 	setWinningSquares(winningSquares => winningSquares.concat(resultObj.combination));
+		// 	setWinningSquares(resultObj.combination);
+		// 	return;
+		// }
+		setWinningSquares(winningSquares => {
+			console.log("click")
+			const resultObj = calculateWinner(squares);
+			return resultObj.result ? winningSquares.concat(resultObj.combination) : winningSquares;
+		})
+		if (winningSquares.length > 0) return;
 		if (squares[i]) return;
 
 		squares[i] = xIsNext ? 'X' : 'O';
@@ -35,6 +43,7 @@ const Game = (props) => {
 		setHistory(historyCopy.concat({ squares: squares }))
 		setStepNumber(historyCopy.length);
 		setXIsNext(xIsNext => !xIsNext);
+		console.log("end")
 	}
 
 	const jumpTo = i => {
@@ -114,7 +123,7 @@ const Game = (props) => {
 			<div className="game-board">
 				<Board squares={history[stepNumber].squares}
 					winningSquares={winningSquares}
-					onClick={i => handleClick(i)} />
+					onClick={handleClick} />
 			</div>
 			<div className="game-info">
 				<div>{status()}</div>
