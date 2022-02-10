@@ -1,6 +1,11 @@
-import { useState } from 'react';
+import { useState, useReducer } from 'react';
 import { calculateWinner } from '../utils/calculateWinner';
 import Board from './Board';
+
+const reducer = (currentState, action) => {
+	if (action?.data)
+		return currentState.concat(action.data);
+}
 
 const Game = (props) => {
 	const initialHistory = [{ squares: Array(9).fill(null) }];
@@ -10,32 +15,57 @@ const Game = (props) => {
 
 	const [selectedMove, setSelectedMove] = useState(null);
 	const [isChronological, setIsChronological] = useState(true);
-	const [winningSquares, setWinningSquares] = useState([]);
+	// const [winningSquares, setWinningSquares] = useState([]);
+	const [winningSquares, setWinningSquares] = useState(new Set());
+
 
 	const handleClick = i => {
-		setWinningSquares([]);
 		const historyCopy = history.slice(0, stepNumber + 1);
 		const current = historyCopy[historyCopy.length - 1];
 		const squares = current.squares.slice();
 
-		const resultObj = calculateWinner(squares);
-		if (resultObj.result) {
-			setWinningSquares(winningSquares => winningSquares.concat(resultObj.combination));
-			return;
-		}
+		if (calculateWinner(squares).result) return;
+		// setWinningSquares(winningSquares => {
+		// 	console.log("click")
+		// 	const resultObj = calculateWinner(squares);
+		// 	return resultObj.result ? winningSquares.concat(resultObj.combination) : winningSquares;
+		// })
+		setWinningSquares(winningSquares => {
+			const resultObj = calculateWinner(squares);
+			return resultObj.result ? new Set([...resultObj.combination]) : winningSquares;
+		})
 		if (squares[i]) return;
 
 		squares[i] = xIsNext ? 'X' : 'O';
 
 		setHistory(historyCopy.concat({ squares: squares }))
 		setStepNumber(historyCopy.length);
+		setSelectedMove(historyCopy.length);
 		setXIsNext(xIsNext => !xIsNext);
+		console.log("end")
+	}
+
+	const updateWinningSquares = latestStep => {
+		const historyCopy = history.slice(0, latestStep + 1);
+		const current = historyCopy[historyCopy.length - 1];
+		const squares = current.squares.slice();
+		setWinningSquares(winningSquares => {
+			const resultObj = calculateWinner(squares);
+			return resultObj.result ? new Set([...resultObj.combination]) : new Set();
+		})
 	}
 
 	const jumpTo = i => {
-		setSelectedMove(i);
-		setStepNumber(i);
-		setXIsNext(i % 2 === 0);
+		// setWinningSquares(currentState => []);
+		// setWinningSquares(currentState => new Set());
+		updateWinningSquares(i);
+		
+		setSelectedMove(currentMove => i);
+		setStepNumber(currentStep => i);
+		setXIsNext(isXNext => i % 2 === 0);
+	
+		console.log(`stepNumber: ${stepNumber}`);
+		console.log(`selectedMove: ${selectedMove}`);
 	}
 
 	const status = () => {
@@ -111,7 +141,7 @@ const Game = (props) => {
 			<div className="game-board">
 				<Board squares={history[stepNumber].squares}
 					winningSquares={winningSquares}
-					onClick={i => handleClick(i)} />
+					onClick={handleClick} />
 			</div>
 			<div className="game-info">
 				<div>{status()}</div>
