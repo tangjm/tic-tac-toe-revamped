@@ -35,7 +35,7 @@ const Game = (props) => {
 			const resultObj = calculateWinner(squares);
 			return resultObj.result ? winningSquares.concat(resultObj.combination) : winningSquares;
 		})
-		if (winningSquares.length > 0) return;
+		if (calculateWinner(squares).result) return;
 		if (squares[i]) return;
 
 		squares[i] = xIsNext ? 'X' : 'O';
