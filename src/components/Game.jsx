@@ -45,8 +45,8 @@ const Game = (props) => {
 		console.log("end")
 	}
 
-	const updateWinningSquares = () => {
-		const historyCopy = history.slice(0, stepNumber + 1);
+	const updateWinningSquares = latestStep => {
+		const historyCopy = history.slice(0, latestStep + 1);
 		const current = historyCopy[historyCopy.length - 1];
 		const squares = current.squares.slice();
 		setWinningSquares(winningSquares => {
@@ -58,7 +58,7 @@ const Game = (props) => {
 	const jumpTo = i => {
 		// setWinningSquares(currentState => []);
 		// setWinningSquares(currentState => new Set());
-		updateWinningSquares();
+		updateWinningSquares(i);
 		
 		setSelectedMove(currentMove => i);
 		setStepNumber(currentStep => i);
