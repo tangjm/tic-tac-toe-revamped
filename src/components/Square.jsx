@@ -4,12 +4,14 @@ import PropTypes from 'prop-types';
 function Square(props) {
 	const { isHighlighted, onClick, value } = props;
 
-	const formatWinningSquare = () => {
-		return isHighlighted ? "square winningSquare" : "square";
+	const handleClick = e => {
+		console.log(e.target.className);
+		onClick();
 	}
+
 	return (
-		<button className={formatWinningSquare()} onClick={onClick}>
-			{value} {console.log(formatWinningSquare())}
+		<button className={isHighlighted ? "square winningSquare" : "square"} onClick={handleClick}>
+			{value}
 		</button>
 	);
 }
