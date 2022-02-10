@@ -32,7 +32,7 @@ const Game = (props) => {
 		// })
 		setWinningSquares(winningSquares => {
 			const resultObj = calculateWinner(squares);
-			return resultObj.result ? new Set([...Array.from(winningSquares.values()), ...resultObj.combination]) : winningSquares;
+			return resultObj.result ? new Set([...resultObj.combination]) : winningSquares;
 		})
 		if (squares[i]) return;
 
@@ -51,16 +51,19 @@ const Game = (props) => {
 		const squares = current.squares.slice();
 		setWinningSquares(winningSquares => {
 			const resultObj = calculateWinner(squares);
-			return resultObj.result ? new Set([...Array.from(winningSquares.values()), ...resultObj.combination]) : winningSquares;
+			return resultObj.result ? new Set([...resultObj.combination]) : new Set();
 		})
 	}
 
 	const jumpTo = i => {
 		// setWinningSquares(currentState => []);
-		setWinningSquares(currentState => new Set());
+		// setWinningSquares(currentState => new Set());
+		updateWinningSquares();
+		
 		setSelectedMove(currentMove => i);
 		setStepNumber(currentStep => i);
 		setXIsNext(isXNext => i % 2 === 0);
+	
 		console.log(`stepNumber: ${stepNumber}`);
 		console.log(`selectedMove: ${selectedMove}`);
 	}
