@@ -19,7 +19,7 @@ const Game = (props) => {
 
 
 	const handleClick = i => {
-		setWinningSquares(currentState => []);
+		
 		const historyCopy = history.slice(0, stepNumber + 1);
 		const current = historyCopy[historyCopy.length - 1];
 		const squares = current.squares.slice();
@@ -42,14 +42,18 @@ const Game = (props) => {
 
 		setHistory(historyCopy.concat({ squares: squares }))
 		setStepNumber(historyCopy.length);
+		setSelectedMove(historyCopy.length);
 		setXIsNext(xIsNext => !xIsNext);
 		console.log("end")
 	}
 
 	const jumpTo = i => {
+		setWinningSquares(currentState => []);
 		setSelectedMove(i);
 		setStepNumber(i);
 		setXIsNext(i % 2 === 0);
+		console.log(`stepNumber: ${stepNumber}`);
+		console.log(`selectedMove: ${selectedMove}`);
 	}
 
 	const status = () => {
