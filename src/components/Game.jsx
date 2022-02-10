@@ -15,27 +15,25 @@ const Game = (props) => {
 
 	const [selectedMove, setSelectedMove] = useState(null);
 	const [isChronological, setIsChronological] = useState(true);
-	const [winningSquares, setWinningSquares] = useState([]);
+	// const [winningSquares, setWinningSquares] = useState([]);
+	const [winningSquares, setWinningSquares] = useState(new Set());
 
 
 	const handleClick = i => {
-		
 		const historyCopy = history.slice(0, stepNumber + 1);
 		const current = historyCopy[historyCopy.length - 1];
 		const squares = current.squares.slice();
 
-		// const resultObj = calculateWinner(squares);
-		// if (resultObj.result) {
-		// 	setWinningSquares(winningSquares => winningSquares.concat(resultObj.combination));
-		// 	setWinningSquares(resultObj.combination);
-		// 	return;
-		// }
-		setWinningSquares(winningSquares => {
-			console.log("click")
-			const resultObj = calculateWinner(squares);
-			return resultObj.result ? winningSquares.concat(resultObj.combination) : winningSquares;
-		})
 		if (calculateWinner(squares).result) return;
+		// setWinningSquares(winningSquares => {
+		// 	console.log("click")
+		// 	const resultObj = calculateWinner(squares);
+		// 	return resultObj.result ? winningSquares.concat(resultObj.combination) : winningSquares;
+		// })
+		setWinningSquares(winningSquares => {
+			const resultObj = calculateWinner(squares);
+			return resultObj.result ? new Set([...Array.from(winningSquares.values()), ...resultObj.combination]) : winningSquares;
+		})
 		if (squares[i]) return;
 
 		squares[i] = xIsNext ? 'X' : 'O';
@@ -47,11 +45,22 @@ const Game = (props) => {
 		console.log("end")
 	}
 
+	const updateWinningSquares = () => {
+		const historyCopy = history.slice(0, stepNumber + 1);
+		const current = historyCopy[historyCopy.length - 1];
+		const squares = current.squares.slice();
+		setWinningSquares(winningSquares => {
+			const resultObj = calculateWinner(squares);
+			return resultObj.result ? new Set([...Array.from(winningSquares.values()), ...resultObj.combination]) : winningSquares;
+		})
+	}
+
 	const jumpTo = i => {
-		setWinningSquares(currentState => []);
-		setSelectedMove(i);
-		setStepNumber(i);
-		setXIsNext(i % 2 === 0);
+		// setWinningSquares(currentState => []);
+		setWinningSquares(currentState => new Set());
+		setSelectedMove(currentMove => i);
+		setStepNumber(currentStep => i);
+		setXIsNext(isXNext => i % 2 === 0);
 		console.log(`stepNumber: ${stepNumber}`);
 		console.log(`selectedMove: ${selectedMove}`);
 	}
@@ -63,7 +72,7 @@ const Game = (props) => {
 		if (winner) {
 			status = "Winner: " + winner;
 		} else {
-			status = "Next player " + (xIsNext ? "X" : "O");
+			status = "Next player: " + (xIsNext ? "X" : "O");
 		}
 		return status;
 	}

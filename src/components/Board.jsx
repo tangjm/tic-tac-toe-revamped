@@ -7,7 +7,8 @@ const Board = props => {
 	const renderSquare = i => {
 		return (
 			<Square id={i} key={i}
-				isHighlighted={props.winningSquares.includes(i) ? true : false}
+				isHighlighted={props.winningSquares.has(i)}
+				// isHighlighted={props.winningSquares.includes(i) ? true : false}
 				value={props.squares[i]}
 				onClick={() => props.onClick(i)}
 			/* () => {
@@ -81,7 +82,8 @@ const Board = props => {
 Board.propTypes = {
 	squares: PropTypes.array.isRequired,
 	onClick: PropTypes.func.isRequired,
-	winningSquares: PropTypes.arrayOf(Number).isRequired
+	// winningSquares: PropTypes.arrayOf(Number).isRequired
+	winningSquares: PropTypes.object.isRequired
 }
 
 export default Board;
