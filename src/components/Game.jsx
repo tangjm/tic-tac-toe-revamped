@@ -54,6 +54,7 @@ const Game = () => {
 				setSelectedMove,
 				setWinningSquares
 			}} />
+			&nbsp;
 			<LanguageSettings />
 		</div>
 	);
