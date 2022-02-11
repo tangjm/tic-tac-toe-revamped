@@ -36,6 +36,10 @@ function App() {
   return (
     <div className="App">
       <LanguageContext.Provider value={determineLanguageContext()}>
+        <div className="titleContainer">
+          <h1 className='title'>Tic Tac Toe</h1>
+          <span className="title-descrip">Revamped</span>
+        </div>
         <Game />
       </LanguageContext.Provider>
     </div>

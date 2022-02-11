@@ -42,6 +42,7 @@ const GameInfo = ({ gameInfo }) => {
 			return (
 				<li key={move} className={isSelected}>
 					<span>{getMoveCoordinates(move)}</span>
+					&nbsp;
 					<button className={isSelected}
 						onClick={() => jumpTo(move)}>
 						{desc}
@@ -105,10 +106,10 @@ const GameInfo = ({ gameInfo }) => {
 	return (
 		<>
 			<div className="game-info">
-				<div>{status()}</div>
+				<h1>{status()}</h1>
 				<ol>{moves()}</ol>
 			</div>
-			<div>
+			<div className="game-info flipOrder">
 				<button onClick={flipMoveOrder}>
 					{switchOrderText[language]}
 				</button>

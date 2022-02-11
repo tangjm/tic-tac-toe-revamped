@@ -39,23 +39,26 @@ const Game = () => {
 
 	return (
 		<div className="game">
-			<div className="game-board">
+			<div className="game-board container">
 				<Board squares={history[stepNumber].squares}
 					winningSquares={winningSquares}
 					onClick={handleClick} />
 			</div>
-			<GameInfo gameInfo={{
-				history,
-				xIsNext,
-				setXIsNext,
-				stepNumber,
-				setStepNumber,
-				selectedMove,
-				setSelectedMove,
-				setWinningSquares
-			}} />
-			&nbsp;
-			<LanguageSettings />
+			<div className="container">
+				<GameInfo gameInfo={{
+					history,
+					xIsNext,
+					setXIsNext,
+					stepNumber,
+					setStepNumber,
+					selectedMove,
+					setSelectedMove,
+					setWinningSquares
+				}} />
+			</div>
+			<div className='container'>
+				<LanguageSettings />
+			</div>
 		</div>
 	);
 }

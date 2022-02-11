@@ -1,6 +1,6 @@
 body {
-	font: 14px "Century Gothic", Futura, sans-serif;
-	margin: 20px;
+	font: 16px "Century Gothic", Futura, sans-serif;
+	margin: 4.2%;
   }
   
   ol, ul {
@@ -77,3 +77,42 @@ body {
   }
 
 
+ .container {
+	  /* margin-left: 5%;
+	  margin-right: 5%; */
+	  /* padding-right: 8%; */
+	  padding-left: 12%;
+  }
+
+  .flipOrder {
+	  margin-top: 20px;
+	  padding-top: 20px;
+  }
+
+  .titleContainer {
+	  text-align: center;
+	  text-decoration: underline rgb(81, 196, 5);
+	  letter-spacing: 0.1rem;
+	  font-size: 2rem;
+	  text-transform: lowercase;
+	  margin-bottom: 10px;
+  }
+
+  .title {
+	  margin-bottom: -8px;
+  }
+
+  .title-descrip {
+	font-family: "Times New Roman", Times, serif;
+	letter-spacing: 0.1rem;
+	font-style: italic;
+	text-align: center;
+	text-decoration: none;
+	text-decoration: none;
+  }
+
+  h1 {
+	  margin-bottom: 20%;
+  }
+
+  

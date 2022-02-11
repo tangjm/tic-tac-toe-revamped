@@ -9,7 +9,7 @@ const LanguageSettings = () => {
 	const selectLanguage = gameText.languageSettingText[language];
 
 	return (
-		<div>
+		<>
 			<label htmlFor="language-select">{selectLanguage}:</label>
 			&nbsp;
 			<select id="language-select"
@@ -23,7 +23,7 @@ const LanguageSettings = () => {
 					)
 				})}
 			</select>
-		</div>
+		</>
 	)
 }
 
