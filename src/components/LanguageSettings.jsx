@@ -1,32 +1,17 @@
 import React, { useContext } from 'react'
 import PropTypes from 'prop-types'
-import LanguageContext from '../utils/LanguageContext';
+import LanguageContext from '../utils/languages';
 
-const LanguageSettings = () => {
-	const languageContext = useContext(LanguageContext);
-	// const handleLanguageChange = (e, languages) => {
-	// 	setLanguage(currentLanguage => {
-	// 		switch (e.target.value) {
-	// 			case "0":
-	// 				return languages[0].language;
-	// 			case "1":
-	// 				return languages[1].language;
-	// 			case "2":
-	// 				return languages[2].language;
-	// 			default:
-	// 				return currentLanguage;
-	// 		}
-	// 	})
-	// }
+const LanguageSettings = props => {
+	const { availableLanguages, setLanguage } = useContext(LanguageContext);
 
 	return (
 		<div>
 			<label htmlFor="language-select">Select Language</label>
 			<select id="language-select"
-				// onChange={e => handleLanguageChange(e, languages)}
-				onChange={e => languageContext.updateLanguage(e.target.value)}
+				onChange={e => setLanguage(e.target.value)}
 			>
-				{languageContext.availableLanguages.map((language, index) => {
+				{availableLanguages.map((language, index) => {
 					return (
 						<option key={index} value={index} defaultValue={!index}>
 							{language.displayValue}
@@ -39,7 +24,7 @@ const LanguageSettings = () => {
 }
 
 LanguageSettings.propTypes = {
-	// setLanguage: PropTypes.func.isRequired,
+
 }
 
 export default LanguageSettings;

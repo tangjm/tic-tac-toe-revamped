@@ -52,29 +52,10 @@ const availableLanguages = [
 	},
 ];
 
-let currentLanguage = availableLanguages[0];
-
-const updateLanguage = newLanguage => {
-	switch (newLanguage) {
-		case "0":
-			currentLanguage = availableLanguages[0];
-			break;
-		case "1":
-			currentLanguage = availableLanguages[1];
-			break;
-		case "2":
-			currentLanguage = availableLanguages[2];
-			break;
-		default:
-			break;
-	}
-}
-
-const initialLanguageContext = {
-	currentLanguage,
+export const initialLanguageContext = {
+	currentLanguage: availableLanguages[0],
 	availableLanguages,
 	gameText,
-	updateLanguage
 }
 
-export default React.createContext(initialLanguageContext);
+export default React.createContext();

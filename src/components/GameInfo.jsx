@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react';
 import PropTypes from 'prop-types';
-import LanguageContext from '../utils/LanguageContext';
+import LanguageContext from '../utils/languages';
 import { calculateWinner } from '../utils/calculateWinner';
 
 const GameInfo = ({ gameInfo }) => {
@@ -12,7 +12,8 @@ const GameInfo = ({ gameInfo }) => {
 		setStepNumber,
 		selectedMove,
 		setSelectedMove,
-		setWinningSquares } = gameInfo;
+		setWinningSquares
+	} = gameInfo;
 	const languageContext = useContext(LanguageContext);
 	const language = languageContext.currentLanguage.language;
 	const { winnerText, nextPlayerText, drawText } = languageContext.gameText.gameResultText;
