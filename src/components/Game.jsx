@@ -5,39 +5,68 @@ import Board from './Board';
 import { LanguageContext } from '../utils/LanguageContext';
 
 const languages = [
-	"english",
-	"mandarin",
-	"french"
+	{
+		language: "english",
+		displayValue: "English"
+	},
+	{
+		language: "mandarin",
+		displayValue: "中文"
+	},
+	{
+		language: "french",
+		displayValue: "Français"
+	},
 ]
 
+const initialHistory = [{ squares: Array(9).fill(null) }];
+
 const Game = () => {
-	const initialHistory = [{ squares: Array(9).fill(null) }];
 	const [history, setHistory] = useState(initialHistory);
 	const [xIsNext, setXIsNext] = useState(true);
 	const [stepNumber, setStepNumber] = useState(0);
-
 	const [selectedMove, setSelectedMove] = useState(null);
 	const [isChronological, setIsChronological] = useState(true);
 	const [winningSquares, setWinningSquares] = useState(new Set());
 
+	const [language, setLanguage] = useState(languages[0].language);
 	const languageContext = useContext(LanguageContext);
 	const { winnerText, nextPlayerText, drawText } = languageContext.gameResultText;
 	const { switchOrderText, gotoMoveText, gotoGameStartText } = languageContext.gameAnalysisText;
-	const [language, setLanguage] = useState("english");
 
 	const handleLanguageChange = (e, languages) => {
+		console.dir(e.target.value);
 		setLanguage(currentLanguage => {
 			switch (e.target.value) {
 				case "0":
-					return languages[0];
+					return languages[0].language;
 				case "1":
-					return languages[1];
+					return languages[1].language;
 				case "2":
-					return languages[2];
+					return languages[2].language;
 				default:
 					return currentLanguage;
 			}
 		})
+	}
+
+	const languageOptions = () => {
+		return (
+			<>
+				<label htmlFor="language-select">Select Language</label>
+				<select id="language-select"
+					onChange={e => handleLanguageChange(e, languages)}
+				>
+					{languages.map((language, index) => {
+						return (
+							<option key={index} value={index} selected={!index}>
+								{language.displayValue}
+							</option>
+						)
+					})}
+				</select>
+			</>
+		)
 	}
 
 	const handleClick = i => {
@@ -152,18 +181,7 @@ const Game = () => {
 				<button onClick={flipMoveOrder}>{switchOrderText[language]}</button>
 			</div>
 			<div>
-				{/* <button onClick={changeLanguage}>Change language</button> */}
-				<label htmlFor="language-select">Select Language</label>
-				<select id="language-select"
-					value={language}
-					onChange={e => handleLanguageChange(e, languages)}
-				>
-					{
-						languages.map((language, index) => {
-							return <option key={index} value={index}>{language}</option>
-						})
-					}
-				</select>
+				{languageOptions()}
 			</div>
 		</div>
 	);
