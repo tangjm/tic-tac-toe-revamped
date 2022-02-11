@@ -1,6 +1,14 @@
-import { useState } from 'react';
+import React, { useContext, useState } from 'react';
+import PropTypes from 'prop-types';
 import { calculateWinner } from '../utils/calculateWinner';
 import Board from './Board';
+import { LanguageContext } from '../utils/LanguageContext';
+
+const languages = [
+	"english",
+	"mandarin",
+	"french"
+]
 
 const Game = () => {
 	const initialHistory = [{ squares: Array(9).fill(null) }];
@@ -11,6 +19,26 @@ const Game = () => {
 	const [selectedMove, setSelectedMove] = useState(null);
 	const [isChronological, setIsChronological] = useState(true);
 	const [winningSquares, setWinningSquares] = useState(new Set());
+
+	const languageContext = useContext(LanguageContext);
+	const { winnerText, nextPlayerText, drawText } = languageContext.gameResultText;
+	const { switchOrderText, gotoMoveText, gotoGameStartText } = languageContext.gameAnalysisText;
+	const [language, setLanguage] = useState("english");
+
+	const handleLanguageChange = (e, languages) => {
+		setLanguage(currentLanguage => {
+			switch (e.target.value) {
+				case "0":
+					return languages[0];
+				case "1":
+					return languages[1];
+				case "2":
+					return languages[2];
+				default:
+					return currentLanguage;
+			}
+		})
+	}
 
 	const handleClick = i => {
 		const historyCopy = history.slice(0, stepNumber + 1);
@@ -56,11 +84,11 @@ const Game = () => {
 		const winner = calculateWinner(current.squares).result;
 		let status;
 		if (winner) {
-			status = "Winner: " + winner;
+			status = winnerText[language] + ": " + winner;
 		} else if (current.squares.every(val => val !== null)) {
-			status = "Draw";
+			status = drawText[language];
 		} else {
-			status = "Next player: " + (xIsNext ? "X" : "O");
+			status = nextPlayerText[language] + ": " + (xIsNext ? "X" : "O");
 		}
 		return status;
 	}
@@ -89,8 +117,9 @@ const Game = () => {
 	const moves = () => {
 		const moves = history.map((step, move) => {
 			const isSelected = selectedMove === move ? "selected" : "";
-			const desc = move ? "goto move #" + move
-				: "goto game start";
+
+			const desc = move ? gotoMoveText[language] + " #" + move
+				: gotoGameStartText[language];
 			return (
 				<li key={move} className={isSelected}>
 					<span>{getMoveCoordinates(move)}</span>
@@ -120,10 +149,28 @@ const Game = () => {
 				<ol>{moves()}</ol>
 			</div>
 			<div>
-				<button onClick={flipMoveOrder}>Reverse move order</button>
+				<button onClick={flipMoveOrder}>{switchOrderText[language]}</button>
+			</div>
+			<div>
+				{/* <button onClick={changeLanguage}>Change language</button> */}
+				<label htmlFor="language-select">Select Language</label>
+				<select id="language-select"
+					value={language}
+					onChange={e => handleLanguageChange(e, languages)}
+				>
+					{
+						languages.map((language, index) => {
+							return <option key={index} value={index}>{language}</option>
+						})
+					}
+				</select>
 			</div>
 		</div>
 	);
+}
+
+Game.propTypes = {
+
 }
 
 export default Game;

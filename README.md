@@ -8,3 +8,6 @@
 6. [x] When no one wins, display a message about the result being a draw
 7. [x] Selecting a previous move in the move history after a player has won removes all highlighting. Selecting the winning move again will highlight the three squares that caused the win.	
 8. [x] Backtracking and then playing out a different sequence of moves that result in a different outcome (either different winning squares or winner) will result in the new three squares that caused the resulting win to be highlighted.
+
+Contexts
+9.  [ ] Add FR and CN language versions. Add a button to change game language.
