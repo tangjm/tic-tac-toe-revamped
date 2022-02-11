@@ -1,20 +1,5 @@
 import React from 'react';
 
-export const languages = [
-	{
-		language: "english",
-		displayValue: "English"
-	},
-	{
-		language: "mandarin",
-		displayValue: "中文"
-	},
-	{
-		language: "french",
-		displayValue: "Français"
-	},
-]
-
 const gameText = {
 	gameResultText: {
 		winnerText: {
@@ -52,4 +37,44 @@ const gameText = {
 	}
 }
 
-export const LanguageContext = React.createContext(gameText);
+const availableLanguages = [
+	{
+		language: "english",
+		displayValue: "English"
+	},
+	{
+		language: "mandarin",
+		displayValue: "中文"
+	},
+	{
+		language: "french",
+		displayValue: "Français"
+	},
+];
+
+let currentLanguage = availableLanguages[0];
+
+const updateLanguage = newLanguage => {
+	switch (newLanguage) {
+		case "0":
+			currentLanguage = availableLanguages[0];
+			break;
+		case "1":
+			currentLanguage = availableLanguages[1];
+			break;
+		case "2":
+			currentLanguage = availableLanguages[2];
+			break;
+		default:
+			break;
+	}
+}
+
+const initialLanguageContext = {
+	currentLanguage,
+	availableLanguages,
+	gameText,
+	updateLanguage
+}
+
+export default React.createContext(initialLanguageContext);
