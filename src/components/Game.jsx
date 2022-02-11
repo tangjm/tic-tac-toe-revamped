@@ -18,15 +18,23 @@ const Game = () => {
 		const current = historyCopy[historyCopy.length - 1];
 		const squares = current.squares.slice();
 
+		// is there already a winner? if yes, return; else, continue
 		if (calculateWinner(squares).result) return;
-		
-		setWinningSquares(winningSquares => new Set(calculateWinner(squares).combination))
 
+		// setWinningSquares(winningSquares => new Set(calculateWinner(squares).combination))
+	
+		
+		// has a move already been played in the square? if yes, return; else, continue
 		if (squares[i]) return;
 
 		squares[i] = xIsNext ? 'X' : 'O';
 
-		setHistory(historyCopy.concat({ squares: squares }))
+		// update game record
+		setHistory(historyCopy.concat({ squares: squares }));
+		setWinningSquares(winningSquares => {
+			const resultObj = calculateWinner(squares);
+			return resultObj.result ? new Set(resultObj.combination) : new Set();
+		})
 		setStepNumber(historyCopy.length);
 		setSelectedMove(historyCopy.length);
 		setXIsNext(xIsNext => !xIsNext);

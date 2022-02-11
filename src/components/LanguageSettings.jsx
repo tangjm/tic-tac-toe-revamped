@@ -7,7 +7,7 @@ const LanguageSettings = props => {
 	const { availableLanguages, setLanguage, gameText, currentLanguage } = languageContext;
 	const { language } = currentLanguage;
 
-	const selectLanguage = gameText.languageSettingtext[language];
+	const selectLanguage = gameText.languageSettingText[language];
 
 	return (
 		<div>
