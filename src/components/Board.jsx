@@ -2,6 +2,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Square from './Square';
 
+const letterCords = <>
+	<br />
+	<span className="letterCords">A</span>
+	<span className="letterCords">B</span>
+	<span className="letterCords">C</span>
+</>;
+
 const Board = props => {
 
 	const renderSquare = i => {
@@ -17,15 +24,22 @@ const Board = props => {
 	const createGameBoard = () => {
 		let count = 0;
 		let board = [];
+		const numberCords = [3, 2, 1];
 		for (let i = 0; i < 3; i++) {
 			let row = [];
 			for (let j = 0; j < 3; j++) {
 				row.push(renderSquare(count));
 				count++;
 			}
+
 			board.push(
 				<div key={"row" + i} className="board-row">
 					{row}
+					&nbsp;
+					<span className="numberCords">
+						{numberCords[i]}
+					</span>
+					{i === 2 && letterCords}
 				</div>
 			);
 		}
