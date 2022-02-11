@@ -20,17 +20,17 @@ const gameText = {
 		winnerText: {
 			english: "Winner",
 			mandarin: "胜者",
-			french: "Gagnant du jeu",
+			french: "Gagnant",
 		},
 		nextPlayerText: {
-			english: "Next Player",
+			english: "Next player",
 			mandarin: "下一手",
 			french: "Prochain joueur",
 		},
 		drawText: {
 			english: "Draw",
 			mandarin: "平局",
-			french: "Un match nul",
+			french: "Match nul",
 		},
 	},
 	gameAnalysisText: {
@@ -45,7 +45,7 @@ const gameText = {
 			french: "Allez déplacer"
 		},
 		gotoGameStartText: {
-			english: "goto game start",
+			english: "goto Game Start",
 			mandarin: "起步棋盘",
 			french: "Aller au début du jeu "
 		}
