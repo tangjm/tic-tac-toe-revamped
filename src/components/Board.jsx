@@ -8,15 +8,8 @@ const Board = props => {
 		return (
 			<Square id={i} key={i}
 				isHighlighted={props.winningSquares.has(i)}
-				// isHighlighted={props.winningSquares.includes(i) ? true : false}
 				value={props.squares[i]}
 				onClick={() => props.onClick(i)}
-			/* () => {
-				(i) => {
-					handleClick(i);
-				}
-			}
-			*/
 			/>
 		);
 	}
@@ -39,41 +32,8 @@ const Board = props => {
 		return board;
 	}
 
-	// alternative solution
-	// const createRows = () => {
-	// 	const gameSquares = generateGameSquares();
-	// 	return gameSquares
-	// 		.reduce((previousSquare, currentSquare, index) => {
-	// 			if (index % 3 === 0) {
-	// 				let row = [
-	// 					currentSquare,
-	// 					gameSquares[index + 1],
-	// 					gameSquares[index + 2]
-	// 				];
-	// 				return previousSquare.concat([row]);
-	// 			}
-	// 			return previousSquare;
-	// 		}, [])
-	// 		.map((row, index) => {
-	// 			return <div key={"row" + index} className="board-row">
-	// 				{row}
-	// 			</div>
-	// 		})
-	// }
-
-	// const generateGameSquares = (start, end) => {
-	// 	let boardCells = [];
-	// 	let count = 0;
-	// 	while (count < 9) {
-	// 		boardCells.push(renderSquare(count));
-	// 		count++;
-	// 	}
-	// 	return boardCells.slice(start, end);
-	// }
-
 	return (
 		<div>
-			{/* {createRows()} */}
 			{createGameBoard()}
 		</div>
 	);
@@ -82,7 +42,6 @@ const Board = props => {
 Board.propTypes = {
 	squares: PropTypes.array.isRequired,
 	onClick: PropTypes.func.isRequired,
-	// winningSquares: PropTypes.arrayOf(Number).isRequired
 	winningSquares: PropTypes.object.isRequired
 }
 
