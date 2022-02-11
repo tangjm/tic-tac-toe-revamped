@@ -14,7 +14,7 @@ const Game = () => {
 	const [isChronological, setIsChronological] = useState(true);
 	const [winningSquares, setWinningSquares] = useState(new Set());
 	const [language, setLanguage] = useState(languages[0].language);
-	
+
 	const languageContext = useContext(LanguageContext);
 	const { winnerText, nextPlayerText, drawText } = languageContext.gameResultText;
 	const { switchOrderText, gotoMoveText, gotoGameStartText } = languageContext.gameAnalysisText;
@@ -28,7 +28,7 @@ const Game = () => {
 
 		setWinningSquares(winningSquares => {
 			const resultObj = calculateWinner(squares);
-			return resultObj.result ? new Set([...resultObj.combination]) : winningSquares;
+			return resultObj.result ? new Set(resultObj.combination) : winningSquares;
 		})
 
 		if (squares[i]) return;
@@ -47,7 +47,7 @@ const Game = () => {
 		const squares = current.squares.slice();
 		setWinningSquares(winningSquares => {
 			const resultObj = calculateWinner(squares);
-			return resultObj.result ? new Set([...resultObj.combination]) : new Set();
+			return resultObj.result ? new Set(resultObj.combination) : new Set();
 		})
 	}
 
