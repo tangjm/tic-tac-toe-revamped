@@ -9,5 +9,12 @@
 7. [x] Selecting a previous move in the move history after a player has won removes all highlighting. Selecting the winning move again will highlight the three squares that caused the win.	
 8. [x] Backtracking and then playing out a different sequence of moves that result in a different outcome (either different winning squares or winner) will result in the new three squares that caused the resulting win to be highlighted.
 
-Contexts
-9.  [ ] Add FR and CN language versions. Add a button to change game language.
+Languages
+
+9. [x] Add FR and CN language versions. Add a dropdown button to change game language.
+
+
+### Netlify
+[![Netlify Status](https://api.netlify.com/api/v1/badges/09cbb80d-1253-419d-93da-0f743c861058/deploy-status)](https://app.netlify.com/sites/tic-tac-toe-revamped/deploys)
+
+[Link to deployed app](https://tic-tac-toe-revamped.netlify.app/)
