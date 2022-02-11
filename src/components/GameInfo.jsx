@@ -37,9 +37,8 @@ const GameInfo = ({ gameInfo }) => {
 	const moves = () => {
 		const moves = history.map((step, move) => {
 			const isSelected = selectedMove === move ? "selected" : "";
-
-			const desc = move ? gotoMoveText[language] + " #" + move
-				: gotoGameStartText[language];
+			const desc = move ? gotoMoveText[language] + " #" + move :
+				gotoGameStartText[language];
 			return (
 				<li key={move} className={isSelected}>
 					<span>{getMoveCoordinates(move)}</span>
@@ -123,4 +122,4 @@ GameInfo.propTypes = {
 	})
 }
 
-export default GameInfo
+export default GameInfo;

@@ -18,13 +18,10 @@ const Game = () => {
 		const current = historyCopy[historyCopy.length - 1];
 		const squares = current.squares.slice();
 
-		// is there already a winner? if yes, return; else, continue
+		// is there already a winner? if so, return; else, continue
 		if (calculateWinner(squares).result) return;
 
-		// setWinningSquares(winningSquares => new Set(calculateWinner(squares).combination))
-	
-		
-		// has a move already been played in the square? if yes, return; else, continue
+		// has a move already been played in the square? if so, return; else, continue
 		if (squares[i]) return;
 
 		squares[i] = xIsNext ? 'X' : 'O';
@@ -49,15 +46,15 @@ const Game = () => {
 			</div>
 			<GameInfo gameInfo={{
 				history,
-				xIsNext, 
+				xIsNext,
 				setXIsNext,
-				stepNumber, 
+				stepNumber,
 				setStepNumber,
-				selectedMove, 
-				setSelectedMove, 
+				selectedMove,
+				setSelectedMove,
 				setWinningSquares
-			}}/>
-			<LanguageSettings  />
+			}} />
+			<LanguageSettings />
 		</div>
 	);
 }

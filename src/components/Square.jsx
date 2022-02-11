@@ -5,7 +5,8 @@ function Square(props) {
 	const { isHighlighted, onClick, value } = props;
 
 	return (
-		<button className={isHighlighted ? "square winningSquare" : "square"} onClick={onClick}>
+		<button className={isHighlighted ? "square winningSquare" : "square"}
+			onClick={onClick}>
 			{value}
 		</button>
 	);

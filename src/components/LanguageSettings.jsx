@@ -1,8 +1,7 @@
 import React, { useContext } from 'react'
-import PropTypes from 'prop-types'
 import LanguageContext from '../utils/languages';
 
-const LanguageSettings = props => {
+const LanguageSettings = () => {
 	const languageContext = useContext(LanguageContext);
 	const { availableLanguages, setLanguage, gameText, currentLanguage } = languageContext;
 	const { language } = currentLanguage;
@@ -26,10 +25,6 @@ const LanguageSettings = props => {
 			</select>
 		</div>
 	)
-}
-
-LanguageSettings.propTypes = {
-
 }
 
 export default LanguageSettings;
