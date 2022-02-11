@@ -1,13 +1,8 @@
-import { useState, useReducer } from 'react';
+import { useState } from 'react';
 import { calculateWinner } from '../utils/calculateWinner';
 import Board from './Board';
 
-const reducer = (currentState, action) => {
-	if (action?.data)
-		return currentState.concat(action.data);
-}
-
-const Game = (props) => {
+const Game = () => {
 	const initialHistory = [{ squares: Array(9).fill(null) }];
 	const [history, setHistory] = useState(initialHistory);
 	const [xIsNext, setXIsNext] = useState(true);
@@ -15,9 +10,7 @@ const Game = (props) => {
 
 	const [selectedMove, setSelectedMove] = useState(null);
 	const [isChronological, setIsChronological] = useState(true);
-	// const [winningSquares, setWinningSquares] = useState([]);
 	const [winningSquares, setWinningSquares] = useState(new Set());
-
 
 	const handleClick = i => {
 		const historyCopy = history.slice(0, stepNumber + 1);
@@ -25,15 +18,12 @@ const Game = (props) => {
 		const squares = current.squares.slice();
 
 		if (calculateWinner(squares).result) return;
-		// setWinningSquares(winningSquares => {
-		// 	console.log("click")
-		// 	const resultObj = calculateWinner(squares);
-		// 	return resultObj.result ? winningSquares.concat(resultObj.combination) : winningSquares;
-		// })
+
 		setWinningSquares(winningSquares => {
 			const resultObj = calculateWinner(squares);
 			return resultObj.result ? new Set([...resultObj.combination]) : winningSquares;
 		})
+
 		if (squares[i]) return;
 
 		squares[i] = xIsNext ? 'X' : 'O';
@@ -42,7 +32,6 @@ const Game = (props) => {
 		setStepNumber(historyCopy.length);
 		setSelectedMove(historyCopy.length);
 		setXIsNext(xIsNext => !xIsNext);
-		console.log("end")
 	}
 
 	const updateWinningSquares = latestStep => {
@@ -56,16 +45,10 @@ const Game = (props) => {
 	}
 
 	const jumpTo = i => {
-		// setWinningSquares(currentState => []);
-		// setWinningSquares(currentState => new Set());
 		updateWinningSquares(i);
-		
 		setSelectedMove(currentMove => i);
 		setStepNumber(currentStep => i);
 		setXIsNext(isXNext => i % 2 === 0);
-	
-		console.log(`stepNumber: ${stepNumber}`);
-		console.log(`selectedMove: ${selectedMove}`);
 	}
 
 	const status = () => {
@@ -83,17 +66,6 @@ const Game = (props) => {
 	}
 
 	const getMoveCoordinates = move => {
-		// 0 -> 0, 0
-		// 1 -> 0, 1
-		// 2 -> 0, 2
-		// 3 -> 1, 0
-		// 4 -> 1, 1
-		// 5 -> 1, 2
-		// 6 -> 2, 0
-		// 7 -> 2, 1
-		// 8 -> 2, 2
-		// find difference between the current history state and its previous state
-		// calculate the coordinates of the square whose value has changed
 		let updatedSquare = null;
 		for (let i = 0; i < 9; i++) {
 			if (move <= 0) return;
