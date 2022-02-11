@@ -1,6 +1,21 @@
 import React from 'react';
 
-const languages = {
+export const languages = [
+	{
+		language: "english",
+		displayValue: "English"
+	},
+	{
+		language: "mandarin",
+		displayValue: "中文"
+	},
+	{
+		language: "french",
+		displayValue: "Français"
+	},
+]
+
+const gameText = {
 	gameResultText: {
 		winnerText: {
 			english: "Winner",
@@ -37,4 +52,4 @@ const languages = {
 	}
 }
 
-export const LanguageContext = React.createContext(languages);
+export const LanguageContext = React.createContext(gameText);

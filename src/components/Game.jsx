@@ -1,73 +1,23 @@
 import React, { useContext, useState } from 'react';
-import PropTypes from 'prop-types';
+import { LanguageContext, languages } from '../utils/LanguageContext';
 import { calculateWinner } from '../utils/calculateWinner';
 import Board from './Board';
-import { LanguageContext } from '../utils/LanguageContext';
+import LanguageSettings from './LanguageSettings';
 
-const languages = [
-	{
-		language: "english",
-		displayValue: "English"
-	},
-	{
-		language: "mandarin",
-		displayValue: "中文"
-	},
-	{
-		language: "french",
-		displayValue: "Français"
-	},
-]
-
-const initialHistory = [{ squares: Array(9).fill(null) }];
+const initialGameHistory = [{ squares: Array(9).fill(null) }];
 
 const Game = () => {
-	const [history, setHistory] = useState(initialHistory);
+	const [history, setHistory] = useState(initialGameHistory);
 	const [xIsNext, setXIsNext] = useState(true);
 	const [stepNumber, setStepNumber] = useState(0);
 	const [selectedMove, setSelectedMove] = useState(null);
 	const [isChronological, setIsChronological] = useState(true);
 	const [winningSquares, setWinningSquares] = useState(new Set());
-
 	const [language, setLanguage] = useState(languages[0].language);
+	
 	const languageContext = useContext(LanguageContext);
 	const { winnerText, nextPlayerText, drawText } = languageContext.gameResultText;
 	const { switchOrderText, gotoMoveText, gotoGameStartText } = languageContext.gameAnalysisText;
-
-	const handleLanguageChange = (e, languages) => {
-		console.dir(e.target.value);
-		setLanguage(currentLanguage => {
-			switch (e.target.value) {
-				case "0":
-					return languages[0].language;
-				case "1":
-					return languages[1].language;
-				case "2":
-					return languages[2].language;
-				default:
-					return currentLanguage;
-			}
-		})
-	}
-
-	const languageOptions = () => {
-		return (
-			<>
-				<label htmlFor="language-select">Select Language</label>
-				<select id="language-select"
-					onChange={e => handleLanguageChange(e, languages)}
-				>
-					{languages.map((language, index) => {
-						return (
-							<option key={index} value={index} selected={!index}>
-								{language.displayValue}
-							</option>
-						)
-					})}
-				</select>
-			</>
-		)
-	}
 
 	const handleClick = i => {
 		const historyCopy = history.slice(0, stepNumber + 1);
@@ -178,17 +128,15 @@ const Game = () => {
 				<ol>{moves()}</ol>
 			</div>
 			<div>
-				<button onClick={flipMoveOrder}>{switchOrderText[language]}</button>
+				<button onClick={flipMoveOrder}>
+					{switchOrderText[language]}
+				</button>
 			</div>
 			<div>
-				{languageOptions()}
+				<LanguageSettings setLanguage={setLanguage} />
 			</div>
 		</div>
 	);
-}
-
-Game.propTypes = {
-
 }
 
 export default Game;
