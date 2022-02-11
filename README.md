@@ -13,6 +13,7 @@ Languages
 
 9. [x] Add FR and CN language versions. Add a dropdown button to change game language.
 
+Bug where going back to previous move, then changing language, then clicking a square doesn't update the winningSquares state.
 
 ### Netlify
 [![Netlify Status](https://api.netlify.com/api/v1/badges/09cbb80d-1253-419d-93da-0f743c861058/deploy-status)](https://app.netlify.com/sites/tic-tac-toe-revamped/deploys)

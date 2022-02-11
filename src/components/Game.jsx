@@ -19,11 +19,8 @@ const Game = () => {
 		const squares = current.squares.slice();
 
 		if (calculateWinner(squares).result) return;
-
-		setWinningSquares(winningSquares => {
-			const resultObj = calculateWinner(squares);
-			return resultObj.result ? new Set(resultObj.combination) : winningSquares;
-		})
+		
+		setWinningSquares(winningSquares => new Set(calculateWinner(squares).combination))
 
 		if (squares[i]) return;
 

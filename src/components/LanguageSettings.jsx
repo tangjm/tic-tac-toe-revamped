@@ -3,11 +3,16 @@ import PropTypes from 'prop-types'
 import LanguageContext from '../utils/languages';
 
 const LanguageSettings = props => {
-	const { availableLanguages, setLanguage } = useContext(LanguageContext);
+	const languageContext = useContext(LanguageContext);
+	const { availableLanguages, setLanguage, gameText, currentLanguage } = languageContext;
+	const { language } = currentLanguage;
+
+	const selectLanguage = gameText.languageSettingtext[language];
 
 	return (
 		<div>
-			<label htmlFor="language-select">Select Language</label>
+			<label htmlFor="language-select">{selectLanguage}:</label>
+			&nbsp;
 			<select id="language-select"
 				onChange={e => setLanguage(e.target.value)}
 			>

@@ -34,6 +34,11 @@ const gameText = {
 			mandarin: "起步棋盘",
 			french: "Aller au début du jeu "
 		}
+	},
+	languageSettingText: {
+		english: "Select language",
+		mandarin: "选择语言",
+		french: "Choisir la langue"
 	}
 }
 
