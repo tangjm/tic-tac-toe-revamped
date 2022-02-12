@@ -1,12 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { calculateWinner } from '../utils/calculateWinner';
 import Board from './Board';
 import GameInfo from './GameInfo';
 import LanguageSettings from './LanguageSettings';
+import ColourThemeContext from '../utils/colourThemes';
 
 const initialGameHistory = [{ squares: Array(9).fill(null) }];
 
 const Game = () => {
+	const colourThemeContext = useContext(ColourThemeContext);
 	const [history, setHistory] = useState(initialGameHistory);
 	const [xIsNext, setXIsNext] = useState(true);
 	const [stepNumber, setStepNumber] = useState(0);
@@ -37,6 +39,7 @@ const Game = () => {
 		setXIsNext(xIsNext => !xIsNext);
 	}
 
+	
 	return (
 		<div className="game">
 			<div className="game-board container">
@@ -58,6 +61,16 @@ const Game = () => {
 			</div>
 			<div className='container'>
 				<LanguageSettings />
+				<br />
+				<br />
+				<label htmlFor="theme-toggle">Theme:</label>
+				&nbsp;
+				<button id="theme-toggle" onClick={colourThemeContext.handleThemeChange}>
+					{colourThemeContext.isLightTheme ? "Light" : "Dark"}
+				</button>
+			</div>
+			<div>
+				
 			</div>
 		</div>
 	);
