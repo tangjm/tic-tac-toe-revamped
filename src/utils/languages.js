@@ -35,10 +35,29 @@ const gameText = {
 			french: "Aller au début du jeu "
 		}
 	},
-	languageSettingText: {
-		english: "Select language",
-		mandarin: "选择语言",
-		french: "Choisir la langue"
+}
+
+const languageSettingText = {
+	english: "Select language",
+	mandarin: "选择语言",
+	french: "Choisir la langue"
+}
+
+const themeSettingText = {
+	labelText: {
+		english: "Theme",
+		mandarin: "主题模式",
+		french: "Thème"
+	},
+	lightThemeText: {
+		english: "Light",
+		mandarin: "白天",
+		french: " Clair"
+	},
+	darkThemeText: {
+		english: "Dark",
+		mandarin: "夜间",
+		french: "Sombre"
 	}
 }
 
@@ -61,6 +80,8 @@ export const initialLanguageContext = {
 	currentLanguage: availableLanguages[0],
 	availableLanguages,
 	gameText,
+	languageSettingText,
+	themeSettingText
 }
 
 export default React.createContext();

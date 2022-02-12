@@ -12,14 +12,12 @@ function App() {
 
   useLayoutEffect(() => {
     const bodyClassList = document.body.classList;
-    // bodyClassList.toggle(colourThemes.dark);
     if (isLightTheme) {
       bodyClassList.remove(colourThemes.dark);
       bodyClassList.add(colourThemes.light);
     } else {
       bodyClassList.add(colourThemes.dark);
       bodyClassList.remove(colourThemes.light);
-    // return;
     }
   }, [isLightTheme])
 

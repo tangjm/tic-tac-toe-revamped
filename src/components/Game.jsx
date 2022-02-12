@@ -4,6 +4,7 @@ import Board from './Board';
 import GameInfo from './GameInfo';
 import LanguageSettings from './LanguageSettings';
 import ColourThemeContext from '../utils/colourThemes';
+import LanguageContext from '../utils/languages';
 
 const initialGameHistory = [{ squares: Array(9).fill(null) }];
 
@@ -39,7 +40,7 @@ const Game = () => {
 		setXIsNext(xIsNext => !xIsNext);
 	}
 
-	
+
 	return (
 		<div className="game">
 			<div className="game-board container">
@@ -63,14 +64,25 @@ const Game = () => {
 				<LanguageSettings />
 				<br />
 				<br />
-				<label htmlFor="theme-toggle">Theme:</label>
-				&nbsp;
-				<button id="theme-toggle" onClick={colourThemeContext.handleThemeChange}>
-					{colourThemeContext.isLightTheme ? "Light" : "Dark"}
-				</button>
-			</div>
-			<div>
-				
+				<LanguageContext.Consumer>
+					{languageContext => {
+						const { language } = languageContext.currentLanguage;
+						const { labelText,
+							lightThemeText,
+							darkThemeText } = languageContext.themeSettingText;
+						return (<>
+							<label htmlFor="theme-toggle">
+								{labelText[language]}:
+							</label>
+							& nbsp;
+							<button id="theme-toggle"
+								onClick={colourThemeContext.handleThemeChange}>
+								{colourThemeContext.isLightTheme ? lightThemeText[language] :
+									darkThemeText[language]}
+							</button>
+						</>)
+					}}
+				</LanguageContext.Consumer>
 			</div>
 		</div>
 	);
