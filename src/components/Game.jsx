@@ -1,10 +1,11 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useLayoutEffect } from 'react';
 import { calculateWinner } from '../utils/calculateWinner';
 import Board from './Board';
 import GameInfo from './GameInfo';
 import LanguageSettings from './LanguageSettings';
 import ColourThemeContext from '../utils/colourThemes';
 import LanguageContext from '../utils/languages';
+import DateTime from './DateTime';
 
 const initialGameHistory = [{ squares: Array(9).fill(null) }];
 
@@ -60,6 +61,9 @@ const Game = () => {
 				}} />
 			</div>
 			<div className='container'>
+				<DateTime />
+				<br />
+				<br />
 				<LanguageSettings />
 				<br />
 				<br />

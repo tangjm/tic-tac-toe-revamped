@@ -8,7 +8,7 @@
 
 10. [x] In light making the game accessible to a wider audience, I want a dropdown button to change the game language so that users can play the game in French and Mandarin. I also want this to be easily extensible so more languages can be added in future.
 11. [x] As a user, I want to be able to toggle a switch so that I can enjoy the game with light and dark themes.
-12. [ ] As a user, I want to be able to view the time so that I can keep an eye on how long I'm spending on the game.
+12. [x] As a user, I want to be able to view the time so that I can keep an eye on how long I'm spending on the game.
 
 ### Feature list:
 

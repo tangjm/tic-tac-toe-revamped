@@ -109,10 +109,15 @@ body {
 	text-align: center;
 	text-decoration: none;
 	text-decoration: none;
-  }
+}
 
-  h1 {
+h1 {
 	  margin-bottom: 20%;
-  }
-
-  
+	}
+	
+#time {
+	font-style: italic;
+	font-weight: bold;
+	letter-spacing: 0.1rem;
+	text-align: center;
+}
