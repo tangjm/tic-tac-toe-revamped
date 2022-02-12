@@ -1,4 +1,4 @@
-import React, { useState, useContext, useLayoutEffect } from 'react';
+import React, { useState, useContext } from 'react';
 import { calculateWinner } from '../utils/calculateWinner';
 import Board from './Board';
 import GameInfo from './GameInfo';
