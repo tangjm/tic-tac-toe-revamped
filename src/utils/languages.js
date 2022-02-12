@@ -77,8 +77,8 @@ const availableLanguages = [
 ];
 
 export const initialLanguageContext = {
-	currentLanguage: availableLanguages[0],
 	availableLanguages,
+	currentLanguage: availableLanguages[0],
 	gameText,
 	languageSettingText,
 	themeSettingText

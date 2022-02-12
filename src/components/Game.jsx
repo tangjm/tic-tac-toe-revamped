@@ -40,7 +40,6 @@ const Game = () => {
 		setXIsNext(xIsNext => !xIsNext);
 	}
 
-
 	return (
 		<div className="game">
 			<div className="game-board container">
@@ -70,17 +69,19 @@ const Game = () => {
 						const { labelText,
 							lightThemeText,
 							darkThemeText } = languageContext.themeSettingText;
-						return (<>
-							<label htmlFor="theme-toggle">
-								{labelText[language]}:
-							</label>
-							& nbsp;
-							<button id="theme-toggle"
-								onClick={colourThemeContext.handleThemeChange}>
-								{colourThemeContext.isLightTheme ? lightThemeText[language] :
-									darkThemeText[language]}
-							</button>
-						</>)
+						return (
+							<>
+								<label htmlFor="theme-toggle">
+									{labelText[language]}:
+								</label>
+								&nbsp;
+								<button id="theme-toggle"
+									onClick={colourThemeContext.handleThemeChange}>
+									{colourThemeContext.isLightTheme ? lightThemeText[language] :
+										darkThemeText[language]}
+								</button>
+							</>
+						)
 					}}
 				</LanguageContext.Consumer>
 			</div>

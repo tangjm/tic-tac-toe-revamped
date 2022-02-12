@@ -3,10 +3,10 @@ import LanguageContext from '../utils/languages';
 
 const LanguageSettings = () => {
 	const languageContext = useContext(LanguageContext);
-	const { availableLanguages, setLanguage, gameText, currentLanguage } = languageContext;
+	const { availableLanguages, setLanguage, languageSettingText, currentLanguage } = languageContext;
 	const { language } = currentLanguage;
 
-	const selectLanguage = gameText.languageSettingText[language];
+	const selectLanguage = languageSettingText[language];
 
 	return (
 		<>

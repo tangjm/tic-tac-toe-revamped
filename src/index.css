@@ -12,14 +12,14 @@ code {
     monospace;
 }
 
-
+/* themes */
 .lightTheme {
-  background: white;
-  color: black;
+  background: rgb(243, 237, 237);
+  color: rgb(48, 37, 37);
 }
 
 .darkTheme {
-  background: black;
-  color: white;
+  background: rgb(48, 37, 37);
+  color: rgb(243, 237, 237);
 }
 
