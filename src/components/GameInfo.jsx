@@ -65,14 +65,6 @@ const GameInfo = ({ gameInfo }) => {
 			}
 		}
 
-		// A3, B3, C3
-		// A2, B2, C2, 
-		// A1, B1, C1
-
-		// A0, A1, A2,
-		// B0, B1, B2,
-		// C0, C1, C2
-
 		const coordinates = [];
 		for (let i = 3; i > 0; i--) {
 			for (let j = 0; j < 3; j++) {
