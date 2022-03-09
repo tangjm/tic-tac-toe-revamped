@@ -2,7 +2,7 @@
 
 [![Netlify Status](https://api.netlify.com/api/v1/badges/09cbb80d-1253-419d-93da-0f743c861058/deploy-status)](https://app.netlify.com/sites/tic-tac-toe-revamped/deploys)
 
-[Link to deployed app](https://tic-tac-toe-revamped.netlify.app/)
+[Visit deployed app](https://tic-tac-toe-revamped.netlify.app/)
 
 ### User Stories:
 
